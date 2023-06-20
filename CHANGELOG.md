@@ -1,4 +1,7 @@
 # Changelog
+## 1.0.1.1 / 2023-06-20
+  - fix alias assignment when usign other alias/color
+
 
 ## 1.0.0 / 2023-03-23
   - add more modes
