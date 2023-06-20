@@ -112,7 +112,7 @@ module Colorize
     #
     def add_color_alias(*params)
       parse_color_alias_params(params).each do |_alias_, _color_|
-        check_if_color_available!(_alias_)
+        check_if_alias_available!(_alias_)
         check_if_color_exist!(_color_)
 
         add_color_code(_alias_, color_codes[_color_])
@@ -129,8 +129,8 @@ module Colorize
       @@color_codes
     end
 
-    def add_color_code(code, color)
-      @@color_codes[code] = color
+    def add_color_code(color, code)
+      @@color_codes[color] = code
     end
 
     #
@@ -189,8 +189,8 @@ module Colorize
     #
     # Check if color exists
     #
-    def check_if_color_available!(color)
-      color_codes[color] && fail(::Colorize::ColorAlreadyExist, "Colorize: color named :#{color} already exist!")
+    def check_if_alias_available!(color)
+      alias_available?(color) || fail(::Colorize::ColorAlreadyExist, "Colorize: color named :#{color} already exist!")
     end
 
     #
@@ -199,5 +199,9 @@ module Colorize
     def check_if_color_exist!(color)
       color_codes[color] || fail(::Colorize::ColorDontExist, "Colorize: color :#{color} don't exist!")
     end
+
+    def alias_available?(color)
+      color_codes[color].nil?
+    end  
   end
 end

@@ -164,6 +164,14 @@ class TestColorize < Minitest::Test
     end
   end
 
+  def test_add_color_aliases_for_same_color
+    String.add_color_alias(:extra_grey, :grey)
+    String.add_color_alias(:other_grey, :grey)
+
+    assert_equal 'This is extra_grey'.extra_grey, 'This is extra_grey'.grey
+    assert_equal 'This is other_grey'.other_grey, 'This is other_grey'.grey
+  end
+
   def test_add_color_alias_with_single_hash
     String.add_color_alias(extra_green: :light_green)
 
